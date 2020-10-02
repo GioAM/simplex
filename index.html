@@ -1,0 +1,75 @@
+<html>
+  <head>
+      <title>Método Simplex</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      <link rel="shortcut icon" href="img/favicon.png" />
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+      <link rel="stylesheet" href="css/custom.css">
+  </head>
+  <body>
+      <h1  class="text-center">Método Simplex</h1>
+
+      <div class="card card-custom">
+        <h5 class="card-header">Entrada de Dados</h5>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                  <label for="firstName">x1</label>
+                  <input type="text" class="form-control" id="funcao_x1" placeholder="" value="10">
+                </div>
+                <div class="col-md-4 mb-3">
+                  <label for="lastName">x2</label>
+                  <input type="number" class="form-control" id="funcao_x2" placeholder="" value="12">
+                </div>
+                <div class="col-md-4 mb-3">
+                  <label for="lastName">b</label>
+                  <input type="number" class="form-control" id="funcao_b" placeholder="" value="0">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4 mb-3">
+                  <label for="firstName">Restrição 1 x1</label>
+                  <input type="text" class="form-control" id="res1_x1" placeholder="" value="1">
+                </div>
+                <div class="col-md-4 mb-3">
+                  <label for="lastName">Restrição 1 x2</label>
+                  <input type="number" class="form-control" id="res1_x2" placeholder="" value="1">
+                </div>
+                <div class="col-md-4 mb-3">
+                  <label for="lastName">Restrição 1 b</label>
+                  <input type="number" class="form-control" id="res1_b" placeholder="" value="100">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4 mb-3">
+                  <label for="firstName">Restrição 2 x1</label>
+                  <input type="text" class="form-control" id="res2_x1" placeholder="" value="1">
+                </div>
+                <div class="col-md-4 mb-3">
+                  <label for="lastName">Restrição 2 x2</label>
+                  <input type="number" class="form-control" id="res2_x2" placeholder="" value="3">
+                </div>
+                <div class="col-md-4 mb-3">
+                  <label for="lastName">Restrição 2 b</label>
+                  <input type="number" class="form-control" id="res2_b" placeholder="" value="270">
+                </div>
+              </div>
+              <button type="button" id="calcular" class="btn btn-outline-success">Calcular</button>
+        </div>
+      </div>
+
+      <div class="card card-custom">
+        <h5 class="card-header">Resultado</h5>
+        <div class="card-body" id='resultado'>
+          
+        </div>
+      </div>
+
+      <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <script src="js/custom.js"></script>
+      
+  </body>
+
+</html
