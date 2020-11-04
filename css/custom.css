@@ -1,4 +1,18 @@
 .card-custom{
 	width: 50%;
     margin-left: 25%;
+ 	margin-top: 20px;
+}
+.button-struct{
+	width: 150px;
+    height: 38px;
+    margin-top: 32px;
+    margin-left: 20px;
+}
+.button-calculate{
+	width: 150px;
+    height: 38px;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-bottom: 20px;
 }

@@ -14,54 +14,29 @@
         <h5 class="card-header">Entrada de Dados</h5>
         <div class="card-body">
             <div class="row">
-                <div class="col-md-4 mb-3">
-                  <label for="firstName">x1</label>
-                  <input type="text" class="form-control" id="funcao_x1" placeholder="" value="10">
-                </div>
-                <div class="col-md-4 mb-3">
-                  <label for="lastName">x2</label>
-                  <input type="number" class="form-control" id="funcao_x2" placeholder="" value="12">
-                </div>
-                <div class="col-md-4 mb-3">
-                  <label for="lastName">b</label>
-                  <input type="number" class="form-control" id="funcao_b" placeholder="" value="0">
-                </div>
+              <div class="col-md-4 mb-3">
+                <label for="firstName">Número de Variáveis</label>
+                <input type="text" class="form-control" id="variaveis" placeholder="" value="">
               </div>
-              <div class="row">
-                <div class="col-md-4 mb-3">
-                  <label for="firstName">Restrição 1 x1</label>
-                  <input type="text" class="form-control" id="res1_x1" placeholder="" value="1">
-                </div>
-                <div class="col-md-4 mb-3">
-                  <label for="lastName">Restrição 1 x2</label>
-                  <input type="number" class="form-control" id="res1_x2" placeholder="" value="1">
-                </div>
-                <div class="col-md-4 mb-3">
-                  <label for="lastName">Restrição 1 b</label>
-                  <input type="number" class="form-control" id="res1_b" placeholder="" value="100">
-                </div>
+              <div class="col-md-4 mb-3">
+                <label for="lastName">Número de Restrições</label>
+                <input type="number" class="form-control" id="restricoes" placeholder="" value="">
               </div>
-              <div class="row">
-                <div class="col-md-4 mb-3">
-                  <label for="firstName">Restrição 2 x1</label>
-                  <input type="text" class="form-control" id="res2_x1" placeholder="" value="1">
-                </div>
-                <div class="col-md-4 mb-3">
-                  <label for="lastName">Restrição 2 x2</label>
-                  <input type="number" class="form-control" id="res2_x2" placeholder="" value="3">
-                </div>
-                <div class="col-md-4 mb-3">
-                  <label for="lastName">Restrição 2 b</label>
-                  <input type="number" class="form-control" id="res2_b" placeholder="" value="270">
-                </div>
-              </div>
-              <button type="button" id="calcular" class="btn btn-outline-success">Calcular</button>
+              <button type="button" id="estrutura" class="btn btn-outline-success button-struct">Montar Estrutura</button>
+            </div>
         </div>
       </div>
 
       <div class="card card-custom">
+        <h5 class="card-header">Estrutura</h5>
+        <div class="card-body" id='box_estrutura'>
+        </div>
+        <button type="button" id="calcular" class="btn btn-outline-success button-calculate">Calcular</button>
+      </div>
+
+      <div class="card card-custom">
         <h5 class="card-header">Resultado</h5>
-        <div class="card-body" id='resultado'>
+        <div class="card-body table-responsive-sm" id='resultado'>
           
         </div>
       </div>
