@@ -120,7 +120,7 @@ function calcularPivo(dados){
 	var menorValor = 99999;
 
 	dados[0].forEach(function (value, index) {
-		if(value < menorValor){
+		if(value < menorValor && value < 0){
 			menorValor = value;
 			x = index;
 		}
