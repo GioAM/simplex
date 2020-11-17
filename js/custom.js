@@ -19,7 +19,7 @@ function calcular(){
 	$("#resultado").html("");
 	var dados = montarDados();
 	desenharMatriz(dados);	
-	while(tem_negativos(dados[0])){
+	while(tem_negativos(dados[0]) && iteracoes < 10){
 		var pivo = calcularPivo(dados);
 		dados = calcularNovaMatriz(dados, pivo);
 		desenharMatriz(dados);
@@ -30,41 +30,43 @@ function calcular(){
 function montarEstrutura(){
 	variaveis = parseInt($("#variaveis").val());
 	restricoes = parseInt($("#restricoes").val());
-	$("#box_estrutura").html("")
-	$("#box_estrutura").append("<h5>Função Z=</h5>")
-	$("#box_estrutura").append("<div class='row' id='funcao'></div>")
-	var divisao = 2;
-	if(variaveis < 6){
-		divisao = parseInt(12/variaveis);
-	}
-	for(var i = 1; i <= variaveis; i++){
-		$("#funcao").append(`
-			<div class='col-md-${divisao} mb-3'>
-                <label for='firstName'>x${i}</label>
-                <input type="text" class="form-control" id="x${i}" placeholder="" value="">
-            </div>`);
-	}
-	var divisao = 2;
-	if(variaveis < 5){
-		divisao = parseInt(12/(variaveis + 1));
-	}
-	$("#box_estrutura").append("<h5>Sujeito a:</h5>")
-	for(var i = 1; i <= restricoes; i++){
-		$("#box_estrutura").append(`<div class='row' id='restricao_${i}'></div>`)
-		for(var j = 1; j <= variaveis; j++){
-			$("#restricao_" + i).append(`
+	if($("#variaveis").val() != "" && $("#restricoes").val() != ""){
+		$("#box_estrutura").html("")
+		$("#box_estrutura").append("<h5>Função Z=</h5>")
+		$("#box_estrutura").append("<div class='row' id='funcao'></div>")
+		var divisao = 2;
+		if(variaveis < 6){
+			divisao = parseInt(12/variaveis);
+		}
+		for(var i = 1; i <= variaveis; i++){
+			$("#funcao").append(`
 				<div class='col-md-${divisao} mb-3'>
-	                <label for='firstName'>x${j}</label>
-	                <input type="text" class="form-control" id="restricao_${i}_x${j}" placeholder="" value="">
+	                <label for='firstName'>x${i}</label>
+	                <input type="text" class="form-control" id="x${i}" placeholder="" value="">
 	            </div>`);
 		}
-		$("#restricao_" + i).append(`
-			<div class='col-md-${divisao} mb-3'>
-                <label for='firstName'>b</label>
-                <= <input type="text" class="form-control" id="restricao_${i}_b" placeholder="" value="">
-            </div>`);
+		var divisao = 2;
+		if(variaveis < 5){
+			divisao = parseInt(12/(variaveis + 1));
+		}
+		$("#box_estrutura").append("<h5>Sujeito a:</h5>")
+		for(var i = 1; i <= restricoes; i++){
+			$("#box_estrutura").append(`<div class='row' id='restricao_${i}'></div>`)
+			for(var j = 1; j <= variaveis; j++){
+				$("#restricao_" + i).append(`
+					<div class='col-md-${divisao} mb-3'>
+		                <label for='firstName'>x${j}</label>
+		                <input type="text" class="form-control" id="restricao_${i}_x${j}" placeholder="" value="">
+		            </div>`);
+			}
+			$("#restricao_" + i).append(`
+				<div class='col-md-${divisao} mb-3'>
+	                <label for='firstName'>b</label>
+	                <= <input type="text" class="form-control" id="restricao_${i}_b" placeholder="" value="">
+	            </div>`);
+		}
+		atualizar_labels();
 	}
-	atualizar_labels();
 }
 	
 
@@ -73,7 +75,11 @@ function montarDados(){
 	var fila = [];
 	fila.push(1)
 	for(var i = 1; i <= variaveis; i++){
-		fila.push(-parseInt($("#x" + i).val()));
+		var valor = 0;
+		if($("#x" + i).val() != ""){
+			valor = -parseInt($("#x" + i).val());
+		}
+		fila.push(valor);
 	}
 	for(var i = 1; i <= restricoes; i++){
 		fila.push(0);
@@ -85,7 +91,11 @@ function montarDados(){
 		fila = []
 		fila.push(0);
 		for(var j = 1; j <= variaveis; j++){
-			fila.push(parseInt($(`#restricao_${i}_x${j}`).val()));
+			var valor = 0;
+			if($(`#restricao_${i}_x${j}`).val() != ""){
+				valor = parseInt($(`#restricao_${i}_x${j}`).val());
+			}
+			fila.push(valor);
 		}
 		for(var j = 1; j <= restricoes; j++){
 			if(j == i){
@@ -94,7 +104,11 @@ function montarDados(){
 				fila.push(0);
 			}
 		}
-		fila.push(parseInt($(`#restricao_${i}_b`).val()));
+		var valorb = 0;
+		if($(`#restricao_${i}_b`).val() != ""){
+			valorb = parseInt($(`#restricao_${i}_b`).val());
+		}
+		fila.push(valorb);
 		matriz.push(fila);
 	}
 	return matriz;
@@ -115,7 +129,7 @@ function calcularPivo(dados){
 	menorValor = 99999;
 	for(var i = 1; i < dados.length; i++){
 		var total = dados[i][dados[i].length-1]/dados[i][x];
-		if(total < menorValor){
+		if(total < menorValor && total >= 0){
 			menorValor = total;
 			y = i;
 		}
@@ -190,11 +204,12 @@ function cabecalho(){
 }
 function tem_negativos(array){
 	var tem_negativos = false;
-	array.forEach(function (value, index) {
+	for(var o = 0; o <= array.length; o++){
+		var value = array[o];
 		if(value < 0){
 			tem_negativos = true;
 		}
-	});
+	}
 	return tem_negativos;
 }
 function atualizar_labels(){
