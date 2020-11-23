@@ -1,6 +1,6 @@
 $("#calcular").click(calcular);
 $("#estrutura").click(montarEstrutura);
-
+$('[data-toggle="tooltip"]').tooltip()
 var dados = []
 var labels = []
 var casasDecimais = 3;
@@ -49,7 +49,7 @@ function montarEstrutura(){
 		if(variaveis < 5){
 			divisao = parseInt(12/(variaveis + 1));
 		}
-		$("#box_estrutura").append("<h5>Sujeito a:</h5>")
+		$("#box_estrutura").append("<h5 >Sujeito a:</h5>")
 		for(var i = 1; i <= restricoes; i++){
 			$("#box_estrutura").append(`<div class='row' id='restricao_${i}'></div>`)
 			for(var j = 1; j <= variaveis; j++){
@@ -167,7 +167,7 @@ function calcularNovaMatriz(dados, pivo){
 
 function desenharMatriz(dados){
 	if(iteracoes == 0){
-		$("#resultado").append("<h5>Tabela Inicial</h5>");
+		$("#resultado").append("<h5>Tabela Inicial </h5>");
 	}else{
 		$("#resultado").append(`<h5>Iteração ${iteracoes}</h5>`);
 	}
@@ -246,26 +246,53 @@ function informacoes(dados){
 			<tbody>
 			</tbody>
 		</table>`);
-	$(`#informacoes_${iteracoes} tbody`).append(`<tr class="vb"><th scope="row"> Variáveis básicas </th></tr>`);
+	$(`#informacoes_${iteracoes} tbody`).append(`<tr class="vb"><th scope="row"> Variáveis básicas  
+			<span data-toggle="tooltip" title="Colunas com valores 1 e 0 (multiplica-se o 1 pelo valor de b).">
+				<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+					<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+					<path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
+					<circle cx="8" cy="4.5" r="1"/>
+				</svg>
+			</span>
+		</th></tr>`);
 	for (var [key, value] of vb) {
 	  $(`#informacoes_${iteracoes} tbody .vb`).append(`<td>${key} = ${value}</td>`);
 	}
-	$(`#informacoes_${iteracoes} tbody`).append(`<tr class="vnb"><th scope="row"> Variáveis não básicas </th></tr>`);
+	$(`#informacoes_${iteracoes} tbody`).append(`<tr class="vnb"><th scope="row"> Variáveis não básicas 
+			<span data-toggle="tooltip" title="Colunas da linha Z que não estão zeradas (Para zerar seus valores, seu conteúdo deve ser 0).">
+				<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+					<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+					<path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
+					<circle cx="8" cy="4.5" r="1"/>
+				</svg>
+			</span>
+		</th></tr>`);
 	for (var [key, value] of vnb) {
 	  $(`#informacoes_${iteracoes} tbody .vnb`).append(`<td>${key} = ${value}</td>`);
 	}
 
 	if(tem_negativos(dados[0])){
-		$(`#informacoes_${iteracoes} tbody`).append(`<tr class="solucao"><th scope="row"> Solução não ótima </th></tr>`);
+		$(`#informacoes_${iteracoes} tbody`).append(`<tr class="solucao"><th scope="row"> Solução não ótima
+			<span data-toggle="tooltip" title="A solução não é ótima, precisa ser recalculada (Para ser ótima, todos os valores de Z devem ser positivos).">
+				<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+					<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+					<path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
+					<circle cx="8" cy="4.5" r="1"/>
+				</svg>
+			</span>
+		</th></tr>`);
 	}else{
-		$(`#informacoes_${iteracoes} tbody`).append(`<tr class="solucao"><th scope="row"> Solução ótima <span>
-			<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-				<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-				<path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
-				<circle cx="8" cy="4.5" r="1"/>
-			</svg>
-		</span>
+		$(`#informacoes_${iteracoes} tbody`).append(`<tr class="solucao"><th scope="row"> Solução ótima 
+			<span data-toggle="tooltip" title="Esta solução é ótima não precisa recalcular a tabela!">
+				<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+					<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+					<path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
+					<circle cx="8" cy="4.5" r="1"/>
+				</svg>
+			</span>
 		</th></tr>`);
 	}
 	$(`#informacoes_${iteracoes} tbody .solucao`).append(`<td>Z = ${dados[0][size-1]}</td>`);
+
+	$('[data-toggle="tooltip"]').tooltip()
 }
