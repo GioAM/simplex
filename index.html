@@ -9,20 +9,19 @@
   </head>
   <body>
       <h1  class="text-center">Método Simplex</h1>
-
       <div class="card card-custom">
         <h5 class="card-header">Entrada de Dados</h5>
         <div class="card-body">
             <div class="row">
               <div class="col-md-4 mb-3">
-                <label for="firstName">Número de Variáveis</label>
-                <input type="text" class="form-control" id="variaveis" placeholder="" value="">
+                <label for="firstName">Número de Variáveis </label>
+                <input type="number" class="form-control" id="variaveis" placeholder="" value="" min="0">
               </div>
               <div class="col-md-4 mb-3">
                 <label for="lastName">Número de Restrições</label>
-                <input type="number" class="form-control" id="restricoes" placeholder="" value="">
+                <input type="number" class="form-control" id="restricoes" placeholder="" value="" min="0">
               </div>
-              <button type="button" id="estrutura" class="btn btn-outline-success button-struct">Montar Estrutura</button>
+              <button type="button" id="estrutura" class="btn btn-outline-success button-struct" data-toggle="tooltip" title="Hooray!"  >Montar Estrutura</button>
             </div>
         </div>
       </div>
@@ -44,7 +43,5 @@
       <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
       <script src="js/custom.js"></script>
-      
   </body>
-
 </html
