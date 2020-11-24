@@ -144,10 +144,18 @@ function calcularNovaMatriz(dados, pivo){
 	var nlp = [];
 	var novaMatriz = [];
 
+	$("#resultado").append(`
+		<h8>NLP</h8>
+		<table class="table table-bordered" id="nlp_${iteracoes}">
+			<tbody>
+			</tbody>
+		</table>`);
+	$(`#nlp_${iteracoes} tbody`).append(`<tr class="nlp"><th scope="row"> / ${pivo.valor} </th></tr>`);
 
 	dados[pivo.y].forEach(function (value, index) {
-		var valorPivo = value/pivo.valor;
-		nlp.push(parseFloat(valorPivo.toFixed(casasDecimais)));
+		var valorPivo = parseFloat((value/pivo.valor).toFixed(casasDecimais));
+		$(`#nlp_${iteracoes} tbody .nlp`).append(`<td>${valorPivo}</td>`);
+		nlp.push(valorPivo);
 	});
 
 	for(var i = 0; i < dados.length; i++){
@@ -155,9 +163,26 @@ function calcularNovaMatriz(dados, pivo){
 		if(i == pivo.y){
 			novaMatriz.push(nlp);
 		}else{
+			var label_details = `${i}`;
+			if(i == 0){
+				label_details = "Z"
+			}
+			$("#resultado").append(`
+				<h8>NL ${label_details} </h8>
+				<table class="table table-bordered" id="nl${i}_${iteracoes}">
+				<tbody>
+				</tbody>
+			</table>`);
+			$(`#nl${i}_${iteracoes} tbody`).append(`<tr class="nl1"><th scope="row"> * ${-dados[i][pivo.x]} </th></tr>`);
+			$(`#nl${i}_${iteracoes} tbody`).append(`<tr class="nl2"><th scope="row"> + Linha ${label_details} </th></tr>`);
+			$(`#nl${i}_${iteracoes} tbody`).append(`<tr class="nl3 result"><th scope="row">=</th></tr>`);
 			dados[i].forEach(function (value, index) {
-				var novoValor = (nlp[index] * -dados[i][pivo.x]) + value;
-				fila.push(parseFloat(novoValor.toFixed(casasDecimais)));
+				var div = parseFloat((nlp[index] * -dados[i][pivo.x]).toFixed(casasDecimais));
+				var novoValor = parseFloat((div + value).toFixed(casasDecimais));
+				fila.push(novoValor);
+				$(`#nl${i}_${iteracoes} tbody .nl1`).append(`<td>${div}</td>`);
+				$(`#nl${i}_${iteracoes} tbody .nl2`).append(`<td>${value}</td>`);
+				$(`#nl${i}_${iteracoes} tbody .nl3`).append(`<td>${novoValor}</td>`);
 			});
 			novaMatriz.push(fila);
 		}
